@@ -11,7 +11,7 @@ sources:
 
   - id: wikidata
     name: Wikidata
-    status: candidate
+    status: implementing
     kind: api
     homepage: https://www.wikidata.org/
     redistribution: review
