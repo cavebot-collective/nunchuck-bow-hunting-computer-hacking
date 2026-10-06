@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cavebot-collective/nunchuck-bow-hunting-computer-hacking/schemas/manifest.schema.json",
+  "title": "Source snapshot manifest",
+  "type": "object",
+  "required": ["source_id", "retrieved_at", "acquisition", "files"],
+  "properties": {
+    "source_id": {"type": "string", "minLength": 1},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "upstream_version": {"type": ["string", "null"]},
+    "acquisition": {
+      "type": "object",
+      "required": ["method"],
+      "properties": {
+        "method": {"type": "string"},
+        "endpoint": {"type": ["string", "null"]},
+        "collector": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "license": {"type": ["string", "null"]},
+    "redistribution": {"enum": ["allowed", "recipe-only", "review", "unknown"]},
+    "record_count": {"type": ["integer", "null"], "minimum": 0},
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "bytes": {"type": "integer", "minimum": 0}
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}
