@@ -2,7 +2,7 @@ version: 1
 sources:
   - id: stackoverflow-tags
     name: Stack Overflow tags
-    status: implemented
+    status: implementing
     kind: api
     homepage: https://stackoverflow.com/tags
     collector: scripts/collect_stackoverflow_tags.py
