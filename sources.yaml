@@ -1,0 +1,63 @@
+version: 1
+sources:
+  - id: stackoverflow-tags
+    name: Stack Overflow tags
+    status: implemented
+    kind: api
+    homepage: https://stackoverflow.com/tags
+    collector: scripts/collect_stackoverflow_tags.py
+    redistribution: review
+    notes: Tag vocabulary and usage counts from the Stack Exchange API.
+
+  - id: wikidata
+    name: Wikidata
+    status: candidate
+    kind: api
+    homepage: https://www.wikidata.org/
+    redistribution: review
+    rationale: Structured contextualizer for technology identity, aliases, classes, ecosystems, platforms, and relations.
+
+  - id: linkedin-skills
+    name: LinkedIn Skills
+    status: candidate
+    kind: taxonomy
+    homepage: https://www.linkedin.com/
+    redistribution: unknown
+    rationale: Professional skill vocabulary and relationships; acquisition path and redistribution terms must be established first.
+
+  - id: indeed-taxonomy
+    name: Indeed taxonomy
+    status: candidate
+    kind: taxonomy
+    homepage: https://www.indeed.com/
+    redistribution: unknown
+    rationale: Job-market skill/category vocabulary without scraping individual postings.
+
+  - id: dice-taxonomy
+    name: Dice taxonomy
+    status: candidate
+    kind: taxonomy
+    homepage: https://www.dice.com/
+    redistribution: unknown
+    rationale: Technology-focused job taxonomy; acquisition path and redistribution terms must be established first.
+
+  - id: official-doc-structures
+    name: Official documentation structures
+    status: candidate
+    kind: documentation
+    redistribution: source-specific
+    rationale: Expert-authored decomposition signal from documentation navigation, TOCs, indexes, and concept hierarchies.
+
+  - id: package-ecosystems
+    name: Package ecosystem metadata
+    status: candidate
+    kind: api
+    redistribution: source-specific
+    rationale: Maven Central, NuGet, npm, PyPI, crates.io and similar metadata provide dependency, category, tag, and ecosystem signals.
+
+  - id: technical-books-syllabi
+    name: Technical books and course syllabi
+    status: candidate
+    kind: corpus
+    redistribution: source-specific
+    rationale: Independent expert decompositions useful for consensus analysis; likely metadata/TOC only unless licensing permits more.
