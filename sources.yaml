@@ -1,17 +1,25 @@
 version: 1
 sources:
-  - id: stackoverflow-tags
-    name: Stack Overflow tags
+  - id: stackoverflow-data-dump
+    name: Stack Overflow complete taxonomy and tag hypergraph
+    status: implementing
+    kind: data-dump
+    homepage: https://archive.org/details/stackexchange
+    redistribution: review
+    notes: Canonical path. Preserve all tags plus question-level tag sets; derive unordered 2-5 tag combination counts without discarding hyperedges.
+
+  - id: stackoverflow-tags-api-smoke
+    name: Stack Overflow tags API smoke sample
     status: implemented
     kind: api
     homepage: https://stackoverflow.com/tags
     collector: scripts/collect_stackoverflow_tags.py
     redistribution: review
-    notes: Tag vocabulary and usage counts from the Stack Exchange API.
+    notes: CI/acquisition smoke test only; never use as the complete taxonomy.
 
   - id: wikidata
     name: Wikidata
-    status: candidate
+    status: implemented
     kind: api
     homepage: https://www.wikidata.org/
     redistribution: review

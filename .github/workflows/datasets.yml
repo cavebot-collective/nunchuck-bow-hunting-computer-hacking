@@ -9,6 +9,20 @@ on:
 permissions:
   contents: read
 jobs:
+  wikidata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect Wikidata technology context
+        run: python scripts/collect_wikidata.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wikidata
+          path: dist/wikidata/
+          if-no-files-found: error
   stackoverflow-tags:
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +36,7 @@ jobs:
         run: |
           python - <<'PY'
           import hashlib,json,pathlib
-          p=pathlib.Path("dist/stackoverflow-tags")
+          p=pathlib.Path("dist/stackoverflow-tags-api-smoke")
           m=json.loads((p/"manifest.json").read_text())
           for f in m["files"]:
               b=(p/f["path"]).read_bytes()
@@ -32,6 +46,6 @@ jobs:
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: stackoverflow-tags
-          path: dist/stackoverflow-tags/
+          name: stackoverflow-tags-api-smoke
+          path: dist/stackoverflow-tags-api-smoke/
           if-no-files-found: error
