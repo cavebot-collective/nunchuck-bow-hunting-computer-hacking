@@ -22,6 +22,7 @@ sources:
     status: implemented
     kind: api
     homepage: https://www.wikidata.org/
+    collector: scripts/collect_wikidata.py
     redistribution: review
     rationale: Structured contextualizer for technology identity, aliases, classes, ecosystems, platforms, and relations.
 
