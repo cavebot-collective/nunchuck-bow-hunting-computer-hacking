@@ -9,6 +9,15 @@ on:
 permissions:
   contents: read
 jobs:
+  stackoverflow-taxonomy-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test Stack Overflow taxonomy extraction
+        run: python tests/test_stackoverflow_taxonomy.py
   source-contract:
     runs-on: ubuntu-latest
     steps:
