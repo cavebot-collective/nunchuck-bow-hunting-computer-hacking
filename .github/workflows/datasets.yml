@@ -46,6 +46,6 @@ jobs:
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: stackoverflow-tags
-          path: dist/stackoverflow-tags/
+          name: stackoverflow-tags-api-smoke
+          path: dist/stackoverflow-tags-api-smoke/
           if-no-files-found: error
