@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Golden Profile Evidence Record",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "claims"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "statement",
+          "dimensions",
+          "sources"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "OBSERVED",
+              "RECONSTRUCTED",
+              "INTERPRETATION",
+              "UNKNOWN"
+            ]
+          },
+          "statement": {
+            "type": "string"
+          },
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "chronology": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "role": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "project_artifact": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "problem_domain": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "technology": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "candidate_concern": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activity": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "context": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": true
+          },
+          "effort": {
+            "type": "object",
+            "properties": {
+              "hours": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "status": {
+                "enum": [
+                  "OBSERVED",
+                  "RECONSTRUCTED",
+                  "UNKNOWN"
+                ]
+              },
+              "proxies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "uri",
+                "quality"
+              ],
+              "properties": {
+                "uri": {
+                  "type": "string"
+                },
+                "quality": {
+                  "enum": [
+                    "direct-artifact",
+                    "personal-primary",
+                    "institutional-bio",
+                    "reputable-secondary",
+                    "weak-aggregator"
+                  ]
+                },
+                "supports": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
