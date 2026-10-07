@@ -1,0 +1,31 @@
+version: 1
+purpose: >
+  Curated validation corpus for capability-model and visualization development.
+  Profiles are evidence datasets, not biographies.
+status: awaiting-deep-research-corpus
+profile_target: 30-40
+claim_statuses:
+  - OBSERVED
+  - RECONSTRUCTED
+  - INTERPRETATION
+  - UNKNOWN
+invariants:
+  - elapsed calendar duration is not effort
+  - unknown effort remains unknown
+  - candidate concern mappings are not allocations
+  - derived morphology is not source evidence
+  - contradictory evidence remains visible
+source_quality:
+  - direct-artifact
+  - personal-primary
+  - institutional-bio
+  - reputable-secondary
+  - weak-aggregator
+planned_outputs:
+  - selected profiles with atomic claims and provenance
+  - rejected and alternate candidates
+  - corpus coverage audit
+  - 8-12 contrast sets with visualization failure criteria
+synthetic_controls:
+  status: planned
+  rationale: known-ground-truth controls for projection discrimination
