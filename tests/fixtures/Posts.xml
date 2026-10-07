@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<posts>
+  <row Id="1" PostTypeId="1" Tags="&lt;c#&gt;&lt;unity&gt;&lt;game-development&gt;" />
+  <row Id="2" PostTypeId="1" Tags="&lt;c#&gt;&lt;asp.net-core&gt;&lt;entity-framework-core&gt;" />
+  <row Id="3" PostTypeId="2" ParentId="1" />
+  <row Id="4" PostTypeId="1" Tags="&lt;prolog&gt;&lt;automated-reasoning&gt;" />
+</posts>
