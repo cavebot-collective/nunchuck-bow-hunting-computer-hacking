@@ -19,7 +19,7 @@ sources:
 
   - id: wikidata
     name: Wikidata
-    status: implementing
+    status: implemented
     kind: api
     homepage: https://www.wikidata.org/
     redistribution: review
