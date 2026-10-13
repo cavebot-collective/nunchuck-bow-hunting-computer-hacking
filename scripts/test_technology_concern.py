@@ -19,8 +19,19 @@ def concern_totals(result):
 
 for pid, p in profiles.items():
     r = m.project_profile(p)
-    assert math.isclose(r["total_hours"], total_event_hours(p), abs_tol=1e-8)
-    assert math.isclose(sum(x["hours"] for x in r["cells"]), total_event_hours(p), abs_tol=1e-8)
+    hours = total_event_hours(p)
+    assert r["technology_allocation_policy"] == "equal-split"
+    assert r["mass_semantics"] == "conserved"
+    assert math.isclose(r["observed_event_hours"], hours, abs_tol=1e-8)
+    assert math.isclose(r["displayed_mass"], hours, abs_tol=1e-8)
+    assert math.isclose(sum(x["hours"] for x in r["cells"]), hours, abs_tol=1e-8)
+
+    duplicated = m.project_profile(p, "duplicate-association")
+    expected_association_mass = sum(e["hours"] * len(e["technology"]) for e in p["events"])
+    assert duplicated["mass_semantics"] == "nonconserved_association_mass"
+    assert math.isclose(duplicated["observed_event_hours"], hours, abs_tol=1e-8)
+    assert math.isclose(duplicated["displayed_mass"], expected_association_mass, abs_tol=1e-8)
+    assert math.isclose(sum(x["hours"] for x in duplicated["cells"]), expected_association_mass, abs_tol=1e-8)
 
 backend = concern_totals(m.project_profile(profiles["backend-specialist"]))
 full = concern_totals(m.project_profile(profiles["true-full-stack"]))
@@ -32,4 +43,4 @@ rust = m.project_profile(profiles["systems-veteran-new-rust"])
 rust_cells = sum(c["hours"] for c in rust["cells"] if c["technology"] == "Rust")
 assert math.isclose(rust_cells, 700.0, abs_tol=1e-8)
 
-print("PASS: Technology × Concern conserves mass and separates control morphologies")
+print("PASS: Technology × Concern conservation, association semantics, and morphology separation")
