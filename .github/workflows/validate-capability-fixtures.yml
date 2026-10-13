@@ -1,0 +1,34 @@
+name: Validate capability fixtures
+
+on:
+  push:
+    paths:
+      - 'fixtures/**'
+      - 'scripts/validate_synthetic_controls.py'
+      - 'scripts/project_technology_concern.py'
+      - 'scripts/test_technology_concern.py'
+      - 'scripts/project_phase_concern.py'
+      - 'scripts/test_phase_concern.py'
+      - '.github/workflows/validate-capability-fixtures.yml'
+  pull_request:
+    paths:
+      - 'fixtures/**'
+      - 'scripts/validate_synthetic_controls.py'
+      - 'scripts/project_technology_concern.py'
+      - 'scripts/test_technology_concern.py'
+      - 'scripts/project_phase_concern.py'
+      - 'scripts/test_phase_concern.py'
+      - '.github/workflows/validate-capability-fixtures.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install PyYAML
+      - run: python scripts/validate_synthetic_controls.py
+      - run: python scripts/test_technology_concern.py
+      - run: python scripts/test_phase_concern.py
