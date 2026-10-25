@@ -17,7 +17,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         else:
             data = PAYLOAD
             self.send_response(200)
-        self.send_header("Content-Length",str(len(data)))
+        self.send_header("Content-Length",str(len(data) + (17 if self.mode == "truncate" else 0)))
         self.end_headers()
         self.wfile.write(data)
 
@@ -47,5 +47,14 @@ with tempfile.TemporaryDirectory() as tmp:
         else:
             raise AssertionError("ignored Range must fail closed")
         assert not path.exists() and part.read_bytes()==PAYLOAD[:200]
+        part.unlink()
+        Handler.mode="truncate"
+        try:
+            acquire(url,path)
+        except (OSError, IOError) as exc:
+            assert "Incomplete" in str(exc) or "read" in str(exc).lower()
+        else:
+            raise AssertionError("truncated transfer must fail")
+        assert not path.exists() and part.exists()
         server.shutdown()
 print("HTTP acquisition fixture OK")
