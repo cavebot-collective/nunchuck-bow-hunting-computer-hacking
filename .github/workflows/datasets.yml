@@ -9,6 +9,15 @@ on:
 permissions:
   contents: read
 jobs:
+  stackoverflow-acquisition-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test offline resumable HTTP acquisition
+        run: PYTHONPATH=. python tests/test_stackoverflow_acquisition.py
   stackoverflow-taxonomy-test:
     runs-on: ubuntu-latest
     steps:
