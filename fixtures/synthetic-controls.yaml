@@ -1,0 +1,45 @@
+version: 1
+purpose: Known-ground-truth controls for projection discrimination.
+note: Synthetic hours are intentionally exact test fixtures, not estimates of real people.
+
+profiles:
+  - id: backend-specialist
+    description: Long-running backend specialist with a brief UI excursion.
+    events:
+      - {phase: early, hours: 4000, technology: [Java, SQL], concern: {service: 0.55, domain: 0.20, data: 0.25}, novelty: medium, autonomy: medium}
+      - {phase: middle, hours: 6000, technology: [Java, PostgreSQL, Kafka], concern: {service: 0.35, domain: 0.15, data: 0.20, distributed: 0.25, ops: 0.05}, novelty: high, autonomy: high}
+      - {phase: excursion, hours: 500, technology: [TypeScript, React], concern: {ui: 0.65, client: 0.30, service: 0.05}, novelty: medium, autonomy: medium}
+      - {phase: recent, hours: 4500, technology: [Go, PostgreSQL, Kubernetes], concern: {service: 0.30, domain: 0.15, data: 0.15, distributed: 0.25, infra: 0.10, ops: 0.05}, novelty: high, autonomy: high}
+
+  - id: true-full-stack
+    description: Persistent distribution across UI, client, service, domain, and data.
+    events:
+      - {phase: early, hours: 4500, technology: [JavaScript, PHP, MySQL], concern: {ui: 0.20, client: 0.20, service: 0.25, domain: 0.15, data: 0.20}, novelty: medium, autonomy: medium}
+      - {phase: middle, hours: 5000, technology: [TypeScript, React, Node.js, PostgreSQL], concern: {ui: 0.20, client: 0.20, service: 0.25, domain: 0.15, data: 0.15, infra: 0.05}, novelty: high, autonomy: high}
+      - {phase: recent, hours: 4000, technology: [TypeScript, React, Go, PostgreSQL, Kubernetes], concern: {ui: 0.15, client: 0.15, service: 0.20, domain: 0.15, data: 0.10, distributed: 0.10, infra: 0.10, ops: 0.05}, novelty: high, autonomy: high}
+
+  - id: shallow-technology-hopper
+    description: Broad technology vocabulary with low repeated concern depth and frequent context switching.
+    events:
+      - {phase: one, hours: 1200, technology: [Java, MySQL], concern: {service: 0.50, data: 0.30, client: 0.20}, novelty: low, autonomy: low}
+      - {phase: two, hours: 1000, technology: [Python, Django, PostgreSQL], concern: {service: 0.45, domain: 0.20, data: 0.25, ops: 0.10}, novelty: low, autonomy: low}
+      - {phase: three, hours: 900, technology: [Ruby, Rails, Redis], concern: {service: 0.45, domain: 0.20, data: 0.25, ops: 0.10}, novelty: low, autonomy: medium}
+      - {phase: four, hours: 1000, technology: [TypeScript, React, Node.js], concern: {ui: 0.25, client: 0.30, service: 0.30, domain: 0.15}, novelty: low, autonomy: medium}
+      - {phase: five, hours: 900, technology: [Go, MongoDB, Docker], concern: {service: 0.40, data: 0.25, distributed: 0.15, infra: 0.20}, novelty: medium, autonomy: medium}
+
+  - id: systems-veteran-new-rust
+    description: Deep systems ancestry followed by comparatively few direct Rust hours.
+    events:
+      - {phase: foundations, hours: 7000, technology: [C, Assembly], concern: {systems: 0.70, performance: 0.20, tooling: 0.10}, novelty: high, autonomy: high}
+      - {phase: mature, hours: 8000, technology: [C++, C, LLVM], concern: {systems: 0.55, performance: 0.20, tooling: 0.15, distributed: 0.10}, novelty: high, autonomy: high}
+      - {phase: rust-entry, hours: 700, technology: [Rust], concern: {systems: 0.55, performance: 0.20, tooling: 0.15, distributed: 0.10}, novelty: medium, autonomy: high}
+    transfer_hypotheses:
+      - {from: systems-veteran-new-rust/foundations, to: systems-veteran-new-rust/rust-entry, status: INTERPRETATION}
+      - {from: systems-veteran-new-rust/mature, to: systems-veteran-new-rust/rust-entry, status: INTERPRETATION}
+
+expected_discriminations:
+  - Technology x Concern should separate backend-specialist from true-full-stack.
+  - Technology count alone should misleadingly favor shallow-technology-hopper; capability projections must not.
+  - Direct Rust exposure must remain 700 hours for systems-veteran-new-rust even when transfer is represented.
+  - Time x Concern should reveal the backend specialist's UI excursion without redefining the lifetime morphology.
+  - Concern x Depth must not derive depth from hours alone.
