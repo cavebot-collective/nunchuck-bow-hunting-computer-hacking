@@ -6,16 +6,21 @@ sources:
     kind: data-dump
     homepage: https://archive.org/details/stackexchange
     redistribution: review
-    notes: Canonical path. Preserve all tags plus question-level tag sets; derive unordered 2-5 tag combination counts without discarding hyperedges.
+    acquisition: "Archive.org is a legacy mirror, not a guaranteed current official route. Stack Overflow said quarterly site dumps moved in-house and became accessible through member profiles; the stable bulk endpoint, authentication details, and current update schedule need revalidation."
+    evidence_types: "Tag taxonomy, question-level co-occurrence, content identity."
+    independence: "First-party community behavior; related-tag summaries are derived from the same question corpus."
+    notes: "Preserve all tags plus question-level tag sets; derive unordered 2-5 tag combinations without discarding hyperedges. Do not treat the Archive.org path as a current acquisition guarantee."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stackoverflow
 
   - id: stackoverflow-tags-api-smoke
     name: Stack Overflow tags API smoke sample
     status: implemented
     kind: api
-    homepage: https://stackoverflow.com/tags
+    homepage: https://api.stackexchange.com/docs
     collector: scripts/collect_stackoverflow_tags.py
     redistribution: review
-    notes: CI/acquisition smoke test only; never use as the complete taxonomy.
+    notes: "Existing collector is a CI/acquisition smoke sample only; it does not collect related tags, synonyms, or a complete taxonomy."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stackoverflow
 
   - id: wikidata
     name: Wikidata
@@ -24,49 +29,389 @@ sources:
     homepage: https://www.wikidata.org/
     collector: scripts/collect_wikidata.py
     redistribution: review
-    rationale: Structured contextualizer for technology identity, aliases, classes, ecosystems, platforms, and relations.
+    rationale: "Identity/context layer for technology names, aliases, classes, ecosystems, platforms, and typed relations. Useful for disambiguation; not a professional competency taxonomy and not independent validation for imported claims."
+    acquisition: "Public API, SPARQL query service, and versioned database dumps; dumps are best for reproducible snapshots, while query services may throttle."
+    identifiers: "Wikidata QIDs and property IDs; aliases, statements, qualifiers, references, and external identifiers."
+    relationships: "Typed claims including subclass, instance, part, platform, product, programming language, and external-ID links."
+    cadence: "Continuously edited; snapshot date and dump version must be recorded."
+    rights: "Wikidata structured data is CC0; check separately for linked media and external content."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#wikidata
+
+  - id: stackoverflow-developer-survey
+    name: Stack Overflow Developer Survey
+    status: candidate
+    kind: survey
+    homepage: https://survey.stackoverflow.co/
+    redistribution: review
+    acquisition: "Annual public results and downloadable anonymized response files; the website also exposes structured JSON for charts. No account or API key is documented for public files."
+    coverage: "Self-reported technologies, roles, experience, learning, desired and admired technologies, work context, and attitudes; the 2026 survey is the current release at research time."
+    identifiers: "Survey year, respondent row, question identifier, and answer option; response identity is anonymized."
+    relationships: "Co-selection within a response and cross-tabulation by role, experience, and other survey dimensions."
+    evidence_types: "Self-reported co-occurrence, technology familiarity, aspiration, role and experience; not measured proficiency or effort."
+    independence: "Same publisher and developer audience as Stack Overflow Q&A, but a separately collected survey instrument; selection and nonresponse bias remain."
+    cadence: "Annual."
+    rights: "Published anonymized results and files use ODbL 1.0; preserve attribution and database-license obligations."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stackoverflow
+
+  - id: esco
+    name: ESCO skills, competences, qualifications and occupations
+    status: candidate
+    kind: taxonomy
+    homepage: https://esco.ec.europa.eu/en/use-esco/download
+    redistribution: allowed
+    acquisition: "Free versioned downloads in RDF, Turtle, ODS, CSV, XML, and JSON-LD across 28 languages. A web service and downloadable local API are offered; the download page warns that the current local API is for reference and will be replaced."
+    coverage: "European occupation and skills/knowledge classification spanning labor market and education/training use."
+    granularity: "Occupation concepts, skill and competence concepts, knowledge concepts, multilingual preferred and alternate labels, descriptions, and occupation-to-skill links."
+    identifiers: "Persistent ESCO concept URIs; language labels are separate from language-independent relation files."
+    relationships: "Broader/narrower concept hierarchy, occupation-to-skill/knowledge links, and mappings to ISCO-08."
+    evidence_types: "Taxonomy, identity, competency/knowledge composition, occupation mapping."
+    independence: "Institutionally curated by the European Commission with stakeholder input; not independent from other EU frameworks where mappings are explicitly supplied."
+    cadence: "Current release at research time is v1.2.1, updated 2025-12-10; no fixed future cadence found."
+    constraints: "No charge or API key for dataset downloads found. Pin release and language files. Attribution and disclosure of modifications required."
+    rights: "Reuse is allowed for any purpose with attribution and clear marking of modifications."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#esco
+
+  - id: onet
+    name: O*NET occupational information database
+    status: candidate
+    kind: database
+    homepage: https://www.onetcenter.org/database.html
+    redistribution: review
+    acquisition: "Free downloadable CSV, Excel, JSON, SQL, and RDF releases. Web Services API provides current data but requires registration and an API key; use the downloadable database for a reproducible public snapshot."
+    coverage: "O*NET-SOC occupations across the United States economy; work and worker characteristics, skills, knowledge, abilities, tasks, activities, context, interests, work styles, education, training, and experience."
+    granularity: "Occupation-by-element ratings, task statements, detailed work activities, and technology skills."
+    identifiers: "O*NET-SOC occupation codes, content-model element IDs, scale IDs, and task IDs."
+    relationships: "Occupation-to-skill/knowledge/ability/task/activity links; task-to-detailed-activity links; ratings include importance, level, relevance, and frequency where defined."
+    evidence_types: "Occupational taxonomy, competency requirements, task decomposition, work context, limited work-experience/education descriptors."
+    independence: "Independent U.S. Department of Labor collection and expert/job-incumbent research; not a measure of an individual's skills or effort."
+    cadence: "Quarterly updates with a primary update in Q3; current database shown as 31.0 at research time."
+    constraints: "Public database files are free. API registration approval and API-specific limits/terms apply; service terms do not automatically grant downstream redistribution rights."
+    rights: "Most database content is CC BY 4.0, with table-specific third-party exceptions; review the selected table/license."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#onet
+
+  - id: nice-framework
+    name: NIST NICE Framework Components
+    status: candidate
+    kind: competency-framework
+    homepage: https://www.nist.gov/itl/applied-cybersecurity/nice/nice-framework-resource-center/nice-framework-current-versions
+    redistribution: review
+    acquisition: "Public JSON and XLSX component downloads through NIST; no API key or fee documented."
+    coverage: "Cybersecurity work roles, work-role categories, competency areas, and task, knowledge, and skill statements."
+    granularity: "Versioned work-role, competency-area, task, knowledge, and skill records; alignment between roles and statements is not complete for every role."
+    identifiers: "NICE component identifiers, including work-role and competency IDs."
+    relationships: "Role/category membership, competency-area membership, and role-to-task/knowledge/skill mappings where supplied."
+    evidence_types: "Occupational taxonomy, competency/task composition, cybersecurity specialization."
+    independence: "NIST-led public framework; distinct from O*NET and ESCO but mappings may connect frameworks."
+    cadence: "Versioned change log; 2.2.0 change log is dated 2026-04-28. The current-version landing page contains an inconsistent 2025 date."
+    constraints: "Free public files; check NIST reuse guidance and distinguish data rights from linked third-party material."
+    rights: "U.S. government work is generally reusable, but NIST requests attribution and change marking; verify individual notices."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#nice-framework
+
+  - id: digcomp
+    name: European Digital Competence Framework (DigComp 3.0)
+    status: candidate
+    kind: competency-framework
+    homepage: https://joint-research-centre.ec.europa.eu/scientific-activities/key-competences-lifelong-learning/digital-competence-framework-digcomp/digcomp-30-resources_en
+    redistribution: allowed
+    acquisition: "Public PDF, editable materials, spreadsheet, and structured JSON data; no API or authentication requirement documented."
+    coverage: "Digital competence for citizens and lifelong learning, with technology and AI competence treated across general domains rather than as an occupational technology inventory."
+    granularity: "Five competence areas, 21 competences, proficiency levels, competence statements, learning outcomes, and glossary."
+    identifiers: "Framework codes and stable published labels; record release and errata state."
+    relationships: "Area-to-competence hierarchy; competence-to-statement and learning-outcome links; learning outcomes include knowledge, skills, attitudes, and proficiency level."
+    evidence_types: "Competency decomposition, learning outcomes, proficiency framing."
+    independence: "European Commission/JRC framework; independent of job boards and package registries. ESCO mappings are not independent corroboration."
+    cadence: "Major editions have been released periodically; no fixed future cadence."
+    constraints: "Published material is CC BY 4.0 with attribution/change notices. The official errata page says published files remain unchanged, so preserve errata alongside the snapshot."
+    rights: "CC BY 4.0; do not imply Commission endorsement or reuse its logo."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#digcomp
+
+  - id: sfia
+    name: Skills Framework for the Information Age (SFIA)
+    status: candidate
+    kind: competency-framework
+    homepage: https://sfia-online.org/en/sfia-9/documentation
+    redistribution: review
+    acquisition: "Public browsing plus PDF, Excel, and RDF Turtle documentation; some implementation resources require account registration."
+    coverage: "Professional digital, data, technology, and business skills across responsibility levels."
+    granularity: "Skill statements, generic attributes, behavioral factors, and seven responsibility levels."
+    identifiers: "SFIA skill and attribute identifiers; versioned framework records."
+    relationships: "Skill-to-level descriptions and generic attributes; not a formal task dependency graph."
+    evidence_types: "Professional skill taxonomy, responsibility/proficiency framing."
+    independence: "Independent professional framework; narrower and more practice-oriented than academic curricula."
+    cadence: "SFIA 9 published in 2024; prior editions are retained."
+    constraints: "Free documentation availability does not equal open redistribution permission; verify current license and any content-specific terms before storing or republishing extracted records."
+    rights: "SFIA terms state that use requires a license; terms and commercial cost need confirmation."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#sfia
+
+  - id: european-ecf
+    name: European e-Competence Framework
+    status: candidate
+    kind: competency-framework
+    homepage: https://esco.ec.europa.eu/en/about-esco/escopedia/escopedia/european-e-competence-framework-e-cf
+    redistribution: review
+    acquisition: "Public summaries and mappings are available; the normative EN 16234-1 standard is distributed through standards bodies and may require purchase. No authoritative free machine-readable bulk file was established."
+    coverage: "ICT professional competencies across business and technology domains."
+    granularity: "Approximately 40 to 41 competencies depending on the edition/source inventory, with five e-competence proficiency levels and knowledge/skill examples."
+    identifiers: "Competence IDs and dimension labels in the framework edition."
+    relationships: "Competence area, competence, proficiency-level, and example-knowledge/skill structure."
+    evidence_types: "Professional competency taxonomy, proficiency framing."
+    independence: "Independent standards-based framework; ESCO has mappings and related work, so mapped records are not independent evidence."
+    cadence: "Versioned European standard; review/version cadence is not a dependable data-refresh schedule."
+    constraints: "Standards text may be paid and copyrighted; verify the exact edition and license before extraction or redistribution."
+    rights: "Review required; no blanket open-data license established."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#e-cf
+
+  - id: cs2023
+    name: ACM/IEEE-CS/AAAI Computer Science Curricula 2023
+    status: candidate
+    kind: curriculum
+    homepage: https://csed.acm.org/
+    redistribution: review
+    acquisition: "Official web pages and report PDFs; no documented public API or complete machine-readable dump found. Repeatable retrieval is possible by pinning the report, report version, and official site snapshot."
+    coverage: "Computer science curricular recommendations spanning 17 knowledge areas."
+    granularity: "Knowledge areas, knowledge units, topics, illustrative learning outcomes, core-topic designations, and instructional-hour allocations."
+    identifiers: "Report section/knowledge-area/unit/topic identifiers; identifiers are edition-bound rather than a global concept URI system."
+    relationships: "Area-to-unit-to-topic composition; topics map to CS Core and Knowledge Area Core and hours."
+    evidence_types: "Expert curricular taxonomy, competency/learning outcomes, instructional coverage and limited hours."
+    independence: "Joint ACM/IEEE-CS/AAAI expert work; independent of job-board data and platform popularity. It is a recommendation, not observed employment demand."
+    cadence: "The report is a major edition; no regular update cadence found."
+    constraints: "Copyright is retained by the organizations; stated permissions are limited. Seek permission before redistributing structured extracts."
+    rights: "Review required; educational-use permission is not general open-data permission."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#cs2023
+
+  - id: mit-ocw
+    name: MIT OpenCourseWare course catalog and syllabi
+    status: candidate
+    kind: curriculum
+    homepage: https://ocw.mit.edu/
+    redistribution: review
+    acquisition: "Public course pages and downloadable course materials; no general-purpose complete catalog API found. Individual course and asset licenses vary."
+    coverage: "University course offerings across technical subjects, including syllabi, prerequisites, topics, readings, assignments, and schedules where supplied."
+    granularity: "Course, prerequisite, unit/week, topic, reading, assignment, and sometimes estimated workload."
+    identifiers: "Course numbers, course-page URLs, term/edition, and asset URLs."
+    relationships: "Course prerequisites and within-course topic/content composition; graph completeness varies."
+    evidence_types: "Curriculum, prerequisite structure, topic co-occurrence, occasional instructional workload."
+    independence: "Institutional instructional design, independent of job-market taxonomies but correlated with academic disciplines."
+    cadence: "Course-specific revisions and archives; no uniform catalog release cadence."
+    constraints: "Per-course and per-item license must be preserved; most material is CC BY-NC-SA 4.0, but exceptions exist."
+    rights: "Review every included course and asset; do not infer one site-wide license."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#curricula
+
+  - id: acm-ccs
+    name: ACM Computing Classification System 2012
+    status: blocked
+    kind: technical-taxonomy
+    homepage: https://www.acm.org/publications/class-2012
+    redistribution: review
+    acquisition: "Browsable classification interface and public documentation found; a current official bulk file/API and redistribution grant were not established."
+    coverage: "Computing research concepts used for indexing ACM publications."
+    granularity: "Hierarchical computing subject concepts; classification is publication-oriented, not a skills/proficiency framework."
+    identifiers: "CCS concept identifiers used in publications and indexing."
+    relationships: "Broader/narrower hierarchy and classification assignments."
+    evidence_types: "Technical-domain taxonomy and concept identity."
+    independence: "Independent scholarly publisher taxonomy; no competency or market evidence."
+    cadence: "The widely used system is CCS 2012; current refresh cadence is unclear."
+    constraints: "Acquire a permitted machine-readable copy and clarify reuse terms before promotion to candidate."
+    rights: "Review required."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#technical-taxonomies
+
+  - id: ieee-technav
+    name: IEEE Technology Navigator topics
+    status: blocked
+    kind: technical-taxonomy
+    homepage: https://technav.ieee.org/faq/
+    redistribution: review
+    acquisition: "TechNav documents a public API, but requires an API key requested from IEEE. API-specific rate limits and bulk reuse rights were not publicly established."
+    coverage: "Thousands of engineering and technology topics drawn from the IEEE Thesaurus, with linked IEEE publications, standards, courses, videos, and organizations."
+    granularity: "Hierarchical topic terms and associated resource collections; the broader Thesaurus also includes controlled terms and relationship indicators."
+    identifiers: "IEEE topic and resource identifiers; confirm stable IDs in API documentation before integration."
+    relationships: "Taxonomy hierarchy plus topic-to-publication/standard/course/organization associations."
+    evidence_types: "Technical taxonomy, identity, related technical artifacts and composition proxies."
+    independence: "Independent IEEE technical vocabulary; topic-resource counts are generated from IEEE's own publishing catalog."
+    cadence: "TechNav says taxonomy follows an annual Thesaurus release; resource counts refresh periodically."
+    constraints: "API key, unpublished quotas, and no confirmed bulk redistribution rights make a public collector unsuitable without written permission."
+    rights: "Review required; do not assume IEEE Xplore API terms automatically govern TechNav."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#technical-taxonomies
 
   - id: linkedin-skills
     name: LinkedIn Skills
-    status: candidate
+    status: blocked
     kind: taxonomy
     homepage: https://www.linkedin.com/
     redistribution: unknown
-    rationale: Professional skill vocabulary and relationships; acquisition path and redistribution terms must be established first.
+    acquisition: "No documented public bulk skills taxonomy or general-purpose skills endpoint found. LinkedIn APIs require approved applications, OAuth permissions, and use-specific access."
+    evidence_types: "Potential professional vocabulary, profile endorsement/co-occurrence, and market demand."
+    independence: "Proprietary member/profile ecosystem; not independent of LinkedIn profile and job data."
+    constraints: "Do not scrape public pages. Obtain a specific data license and confirm retention, redistribution, and permitted use before reconsidering."
+    rationale: "Potentially valuable vocabulary, but current public acquisition and redistribution route is not established."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
 
   - id: indeed-taxonomy
     name: Indeed taxonomy
-    status: candidate
+    status: blocked
     kind: taxonomy
     homepage: https://www.indeed.com/
     redistribution: unknown
-    rationale: Job-market skill/category vocabulary without scraping individual postings.
+    acquisition: "Partner APIs are approved integration interfaces, not a public taxonomy export. The developer agreement restricts database creation, permanent copies, redistribution, and competitive use."
+    evidence_types: "Potential job-market vocabulary and demand; job-posting data would be a separate source."
+    independence: "Proprietary job marketplace; overlaps heavily with other posting-derived market signals."
+    constraints: "No scraping or corpus-building from the public site; a written license would be required for this research use."
+    rationale: "Keep as a blocked lead unless Indeed grants a compliant data-access and reuse path."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
 
   - id: dice-taxonomy
-    name: Dice taxonomy
-    status: candidate
+    name: Dice technology skill and job taxonomy
+    status: blocked
     kind: taxonomy
     homepage: https://www.dice.com/
     redistribution: unknown
-    rationale: Technology-focused job taxonomy; acquisition path and redistribution terms must be established first.
+    acquisition: "No public bulk taxonomy endpoint found. Dice terms prohibit automated retrieval, data mining, and copying site structure/content."
+    evidence_types: "Potential technology vocabulary, job-market demand, and proprietary matching relationships."
+    independence: "Proprietary technology job marketplace; market signals overlap with other posting/profile corpora."
+    constraints: "Do not scrape. Reconsider only with a documented export/API and written reuse terms."
+    rationale: "A potentially useful technical-market source with no presently verified compliant bulk acquisition route."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
+
+  - id: lightcast-skills
+    name: Lightcast Skills taxonomy and Classification API
+    status: candidate
+    kind: taxonomy
+    homepage: https://docs.lightcast.io/
+    redistribution: review
+    acquisition: "Classification API access requires approval under public-good or commercial access arrangements; no open complete dump was found. The free extraction allowance is small and does not imply full taxonomy-download rights."
+    coverage: "Tens of thousands of skill concepts derived from labor-market and profile data, organized into categories and subcategories."
+    granularity: "Skill identity, descriptions, categories, hierarchy, and provider-derived relationships/co-occurrence."
+    identifiers: "Lightcast skill IDs and canonical labels; confirm API version and stability contract."
+    relationships: "Skill-to-category hierarchy, related skill relationships, and aggregated co-occurrence/demand signals where licensed."
+    evidence_types: "Market taxonomy, identity, demand and co-occurrence."
+    independence: "Commercially curated, but substantially derived from job postings, resumes, and profiles; overlaps with other market sources and may map to O*NET."
+    cadence: "Provider says taxonomy updates monthly; confirm service-specific snapshot/version semantics."
+    constraints: "Access approval, license, price, rate limits, and redistribution rights require provider confirmation."
+    rights: "Review required; API access is not redistribution permission."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
 
   - id: official-doc-structures
     name: Official documentation structures
     status: candidate
     kind: documentation
     redistribution: source-specific
-    rationale: Expert-authored decomposition signal from documentation navigation, TOCs, indexes, and concept hierarchies.
+    acquisition: "Prefer official source repositories and documented build artifacts such as TOC.yml, Sphinx inventories, and navigation/index files. Pin repository commit, product/version, and each license."
+    coverage: "Product-specific concepts, features, operations, modules, and learning pathways."
+    granularity: "Pages, sections, API symbols, concepts, prerequisites when explicit, and navigation parent/child links."
+    identifiers: "Canonical page URLs, symbol IDs, repository paths, and source-native IDs."
+    relationships: "Navigation hierarchy, cross-links, symbol references, and explicit prerequisites; links do not automatically imply conceptual dependency."
+    evidence_types: "Expert-authored taxonomy, technical identity, documentation composition."
+    independence: "Independent per publisher/product, but each publisher's docs reflect its own product ontology and can duplicate vendor terminology."
+    cadence: "Changes with source commits/releases; record the source revision rather than assuming a schedule."
+    constraints: "Do not scrape rendered sites when a first-party repository is available; honor per-repository licenses, third-party notices, and publishing rules."
+    rationale: "A collection of bounded, source-specific integrations rather than one universal documentation corpus."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#documentation-structures
 
   - id: package-ecosystems
     name: Package ecosystem metadata
     status: candidate
     kind: api
     redistribution: source-specific
-    rationale: Maven Central, NuGet, npm, PyPI, crates.io and similar metadata provide dependency, category, tag, and ecosystem signals.
+    acquisition: "Use each registry's documented API, feed, or index; start with one ecosystem and a bounded, resumable metadata subset."
+    evidence_types: "Technical identity, explicit dependency/composition, ecosystem membership, weak categories/tags, and noisy popularity proxies."
+    independence: "Publisher-entered package metadata is distinct from job taxonomies but duplicated across ecosystems and is not evidence of a practitioner's skill."
+    constraints: "Package metadata reuse and package artifact licensing are separate questions; preserve package-declared licenses without treating them as metadata licenses."
+    rationale: "Use package dependency edges as a technical composition signal, not as a proxy for professional competency or effort."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#package-registries
+
+  - id: npm-registry
+    name: npm registry metadata
+    status: candidate
+    kind: package-registry
+    homepage: https://github.com/npm/registry/blob/main/docs/REPLICATE-API.md
+    redistribution: review
+    acquisition: "Official CouchDB replication API supports an initial replication and continuous change following; public registry replication is permitted by npm terms."
+    coverage: "npm package names, versions, descriptions, keywords, maintainers, manifests, and ecosystem metadata."
+    identifiers: "Package name, version, scope, and registry document/revision IDs."
+    relationships: "Version-to-version history and publisher-declared dependency ranges; keywords are self-assigned."
+    evidence_types: "Technical identity, declared composition/dependencies, tags, and publication co-occurrence."
+    independence: "Publisher-entered ecosystem metadata; independent of job taxonomies but popular packages are not proof of skill."
+    cadence: "Continuous change feed; snapshot revision and replication watermark are required."
+    constraints: "Respect npm acceptable-use and unreasonable-load rules; registry terms give five million monthly requests as clearly unreasonable."
+    rights: "Public registry replication is allowed under npm terms; package artifact licenses remain independent."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#package-registries
+
+  - id: pypi-registry
+    name: PyPI project metadata and classifiers
+    status: candidate
+    kind: package-registry
+    homepage: https://docs.pypi.org/api/
+    redistribution: review
+    acquisition: "JSON and Index APIs expose per-project and per-release metadata. No public complete registry snapshot was confirmed in this review."
+    coverage: "Python project names, releases, descriptions, dependency metadata, project URLs, and Trove classifiers."
+    identifiers: "Normalized project name, version, release file, and artifact digests."
+    relationships: "Release sequence, declared requirements, classifiers, and publisher-entered keywords."
+    evidence_types: "Technical identity, dependency composition, category/classifier, release co-occurrence."
+    independence: "Publisher-provided package metadata; Trove classifiers are user-selected and accuracy is not centrally validated."
+    cadence: "Continuous uploads; API responses support ETags and cache-aware incremental retrieval."
+    constraints: "No fixed edge rate limit is documented, but thousands of requests in minutes are discouraged and abusive clients may be blocked."
+    rights: "No blanket metadata license found; package file licenses are project-specific."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#package-registries
+
+  - id: nuget-registry
+    name: NuGet.org package metadata
+    status: candidate
+    kind: package-registry
+    homepage: https://learn.microsoft.com/en-us/nuget/api/overview
+    redistribution: review
+    acquisition: "NuGet V3 service index, Registration resource, and chronological Catalog API provide public metadata; no API key required for public reads."
+    coverage: ".NET package IDs, versions, descriptions, tags, target-framework dependency groups, owners, deprecations, and package events."
+    identifiers: "Normalized package ID and version, registration URL, and catalog timestamp."
+    relationships: "Version sequence, package dependencies grouped by target framework, and catalog create/update/delete events."
+    evidence_types: "Technical identity, composition/dependency, tags, and change history."
+    independence: "Publisher-authored ecosystem metadata; distinct from job data, but duplicated with other registries and potentially low-quality."
+    cadence: "Continuous publication and catalog events."
+    constraints: "Use V3 APIs. Search is documented as currently unthrottled; other endpoints have limits and can return 429/403."
+    rights: "Metadata and artifact reuse must be assessed separately; no blanket open license asserted."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#package-registries
+
+  - id: crates-io
+    name: crates.io index and metadata
+    status: candidate
+    kind: package-registry
+    homepage: https://doc.rust-lang.org/cargo/reference/registry-index.html
+    redistribution: review
+    acquisition: "Sparse HTTP index and public git index expose package metadata; use the index rather than crawling crate archives for taxonomy work."
+    coverage: "Rust crate names, versions, descriptions, keywords, categories, features, and dependencies."
+    identifiers: "Crate name, version, index path, and registry package ID."
+    relationships: "Version and dependency edges, optional-feature composition, and publisher-selected keyword/category labels."
+    evidence_types: "Technical identity, declared composition/dependencies, tags."
+    independence: "Publisher-entered package metadata; independent of job taxonomies but not an expertise measurement."
+    cadence: "Continuous publication through the index."
+    constraints: "crates.io API policy sets one request per second and asks clients to use an identifying User-Agent; the index is a better bulk route."
+    rights: "No blanket metadata license asserted; package artifact license is separate."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#package-registries
+
+  - id: maven-central
+    name: Maven Central artifact metadata
+    status: candidate
+    kind: package-registry
+    homepage: https://central.sonatype.org/search/rest-api-guide/
+    redistribution: review
+    acquisition: "Sonatype Search REST API and repository metadata; a full local corpus requires careful paging/crawling and obeying repository limits."
+    coverage: "Maven group/artifact/version identifiers, POM metadata, tags, descriptions, licenses, and declared dependencies."
+    identifiers: "Group ID, artifact ID, version, repository path, and publication timestamp."
+    relationships: "Version succession and POM dependency edges; scopes and optionality affect interpretation."
+    evidence_types: "Technical identity, composition/dependency, publisher-assigned keywords."
+    independence: "Publisher-authored ecosystem metadata; cross-registry duplicates are common."
+    cadence: "Continuous artifact publication; API/index updates are not a normative skill-taxonomy cadence."
+    constraints: "Search API can rate-limit with 429 and may block aggressive clients; no API key generally needed for public reads."
+    rights: "Metadata and artifact licenses differ; assess per artifact and preserve license declarations."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#package-registries
 
   - id: technical-books-syllabi
     name: Technical books and course syllabi
     status: candidate
     kind: corpus
     redistribution: source-specific
-    rationale: Independent expert decompositions useful for consensus analysis; likely metadata/TOC only unless licensing permits more.
+    rationale: "Use as a source family, not a bulk scrape. Prefer licensed/open course materials and official curricula; preserve bibliographic identity, edition, TOC, prerequisites, learning outcomes, and item-level rights."
+    acquisition: "Per-source catalog, institutional repository, publisher license, or open course archive; no universal API or redistribution grant."
+    evidence_types: "Expert decomposition, curriculum, topic composition, prerequisites, and occasional instructional effort."
+    independence: "Varies by author and institution; book TOCs and copied course outlines may not be independent."
+    constraints: "Book/course metadata, table of contents, full text, and exercise text can carry different rights."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#curricula
