@@ -141,7 +141,7 @@ sources:
     cadence: "SFIA 9 published in 2024; prior editions are retained."
     constraints: "Free documentation availability does not equal open redistribution permission; verify current license and any content-specific terms before storing or republishing extracted records."
     rights: "SFIA terms state that use requires a license; terms and commercial cost need confirmation."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#sfia
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#sfia-and-european-e-cf
 
   - id: european-ecf
     name: European e-Competence Framework
@@ -276,7 +276,7 @@ sources:
     name: Lightcast Skills taxonomy and Classification API
     status: candidate
     kind: taxonomy
-    homepage: https://docs.lightcast.io/
+    homepage: https://docs.lightcast.io/lightcast-api/docs/api-access
     redistribution: review
     acquisition: "Classification API access requires approval under public-good or commercial access arrangements; no open complete dump was found. The free extraction allowance is small and does not imply full taxonomy-download rights."
     coverage: "Tens of thousands of skill concepts derived from labor-market and profile data, organized into categories and subcategories."
@@ -305,7 +305,7 @@ sources:
     cadence: "Changes with source commits/releases; record the source revision rather than assuming a schedule."
     constraints: "Do not scrape rendered sites when a first-party repository is available; honor per-repository licenses, third-party notices, and publishing rules."
     rationale: "A collection of bounded, source-specific integrations rather than one universal documentation corpus."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#documentation-structures
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#technical-documentation-structures
 
   - id: package-ecosystems
     name: Package ecosystem metadata
