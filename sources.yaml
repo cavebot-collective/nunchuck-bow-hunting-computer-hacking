@@ -10,7 +10,7 @@ sources:
     evidence_types: "Tag taxonomy, question-level co-occurrence, content identity."
     independence: "First-party community behavior; related-tag summaries are derived from the same question corpus."
     notes: "Preserve all tags plus question-level tag sets; derive unordered 2-5 tag combinations without discarding hyperedges. Do not treat the Archive.org path as a current acquisition guarantee."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stackoverflow
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stack-overflow
 
   - id: stackoverflow-tags-api-smoke
     name: Stack Overflow tags API smoke sample
@@ -20,7 +20,7 @@ sources:
     collector: scripts/collect_stackoverflow_tags.py
     redistribution: review
     notes: "Existing collector is a CI/acquisition smoke sample only; it does not collect related tags, synonyms, or a complete taxonomy."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stackoverflow
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stack-overflow
 
   - id: wikidata
     name: Wikidata
@@ -51,7 +51,7 @@ sources:
     independence: "Same publisher and developer audience as Stack Overflow Q&A, but a separately collected survey instrument; selection and nonresponse bias remain."
     cadence: "Annual."
     rights: "Published anonymized results and files use ODbL 1.0; preserve attribution and database-license obligations."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stackoverflow
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stack-overflow
 
   - id: esco
     name: ESCO skills, competences, qualifications and occupations
@@ -159,7 +159,7 @@ sources:
     cadence: "Versioned European standard; review/version cadence is not a dependable data-refresh schedule."
     constraints: "Standards text may be paid and copyrighted; verify the exact edition and license before extraction or redistribution."
     rights: "Review required; no blanket open-data license established."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#e-cf
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#sfia-and-european-e-cf
 
   - id: cs2023
     name: ACM/IEEE-CS/AAAI Computer Science Curricula 2023
@@ -195,7 +195,7 @@ sources:
     cadence: "Course-specific revisions and archives; no uniform catalog release cadence."
     constraints: "Per-course and per-item license must be preserved; most material is CC BY-NC-SA 4.0, but exceptions exist."
     rights: "Review every included course and asset; do not infer one site-wide license."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#curricula
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#mit-opencourseware-and-course-catalogs
 
   - id: acm-ccs
     name: ACM Computing Classification System 2012
@@ -213,7 +213,7 @@ sources:
     cadence: "The widely used system is CCS 2012; current refresh cadence is unclear."
     constraints: "Acquire a permitted machine-readable copy and clarify reuse terms before promotion to candidate."
     rights: "Review required."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#technical-taxonomies
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#independent-technical-taxonomies-and-curricula
 
   - id: ieee-technav
     name: IEEE Technology Navigator topics
@@ -231,7 +231,7 @@ sources:
     cadence: "TechNav says taxonomy follows an annual Thesaurus release; resource counts refresh periodically."
     constraints: "API key, unpublished quotas, and no confirmed bulk redistribution rights make a public collector unsuitable without written permission."
     rights: "Review required; do not assume IEEE Xplore API terms automatically govern TechNav."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#technical-taxonomies
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#independent-technical-taxonomies-and-curricula
 
   - id: linkedin-skills
     name: LinkedIn Skills
@@ -244,7 +244,7 @@ sources:
     independence: "Proprietary member/profile ecosystem; not independent of LinkedIn profile and job data."
     constraints: "Do not scrape public pages. Obtain a specific data license and confirm retention, redistribution, and permitted use before reconsidering."
     rationale: "Potentially valuable vocabulary, but current public acquisition and redistribution route is not established."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
 
   - id: indeed-taxonomy
     name: Indeed taxonomy
@@ -257,7 +257,7 @@ sources:
     independence: "Proprietary job marketplace; overlaps heavily with other posting-derived market signals."
     constraints: "No scraping or corpus-building from the public site; a written license would be required for this research use."
     rationale: "Keep as a blocked lead unless Indeed grants a compliant data-access and reuse path."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
 
   - id: dice-taxonomy
     name: Dice technology skill and job taxonomy
@@ -270,7 +270,7 @@ sources:
     independence: "Proprietary technology job marketplace; market signals overlap with other posting/profile corpora."
     constraints: "Do not scrape. Reconsider only with a documented export/API and written reuse terms."
     rationale: "A potentially useful technical-market source with no presently verified compliant bulk acquisition route."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
 
   - id: lightcast-skills
     name: Lightcast Skills taxonomy and Classification API
@@ -288,7 +288,7 @@ sources:
     cadence: "Provider says taxonomy updates monthly; confirm service-specific snapshot/version semantics."
     constraints: "Access approval, license, price, rate limits, and redistribution rights require provider confirmation."
     rights: "Review required; API access is not redistribution permission."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#market-sources
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
 
   - id: official-doc-structures
     name: Official documentation structures
@@ -414,4 +414,4 @@ sources:
     evidence_types: "Expert decomposition, curriculum, topic composition, prerequisites, and occasional instructional effort."
     independence: "Varies by author and institution; book TOCs and copied course outlines may not be independent."
     constraints: "Book/course metadata, table of contents, full text, and exercise text can carry different rights."
-    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#curricula
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#mit-opencourseware-and-course-catalogs
