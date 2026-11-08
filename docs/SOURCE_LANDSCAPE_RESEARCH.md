@@ -48,7 +48,7 @@ The two 4.0-ranked options after these are the Stack Overflow Developer Survey a
 
 ## Source assessments
 
-### Stack Overflow and Stack Exchange
+### Stack Overflow
 
 #### Tag API and question dump
 
@@ -66,7 +66,7 @@ This is a stronger evidence source for self-reported familiarity and aspiration 
 
 #### Mirrors and derived views
 
-BigQuery public datasets and Snowflake marketplace listings are alternate access/distribution channels for Stack Exchange data. They generally repackage the same underlying source rather than supply independent evidence. Data Explorer is useful for exploratory SQL, but its query-result constraints and underlying shared corpus make it a poor canonical ingestion path. Use these routes for discovery or backup, not as separate corroborating sources.
+Google's documentation identifies a public BigQuery Stack Overflow dataset, and Stack Overflow announced marketplace availability in Snowflake. These are alternate access/distribution channels for the same underlying source, not independent evidence. BigQuery requires a Google Cloud project and charges for query bytes above the free allowance; Snowflake access may depend on Marketplace/account terms. Data Explorer is useful for exploratory SQL, but its query-result constraints and shared underlying corpus make it a poor canonical ingestion path. Use these routes for discovery or backup, not as separate corroborating sources.
 
 ### Wikidata
 
@@ -92,7 +92,7 @@ The O*NET-SOC occupation taxonomy covers U.S. work and organizes skills, knowled
 
 Ratings describe the importance or level of an element for an occupation; they are not ratings of a named person's proficiency. Education and experience fields are occupational descriptors, not effort totals. O*NET is independent evidence from ESCO, but both are designed to describe labor-market occupations and can share external frameworks or concepts.
 
-#### NICE Framework Components
+#### NICE Framework
 
 NIST publishes [NICE Framework Components](https://www.nist.gov/itl/applied-cybersecurity/nice/nice-framework-resource-center/nice-framework-current-versions) as JSON and XLSX, separately from the framework's SP 800-181 prose. The change log lists version 2.2.0 on 2026-04-28, while the current-version landing page still displays an inconsistent 2025 date. Use the change log for the release date and retain the inconsistency as source metadata.
 
@@ -100,7 +100,7 @@ Components include work-role categories, work roles, competency areas, and task,
 
 NICE supplies strong task and competency structure, but no universal proficiency score and no evidence of individual effort. Its independent institutional origin makes it a good contrast to occupational labor surveys.
 
-#### DigComp 3.0
+#### DigComp
 
 The JRC [DigComp 3.0 resources](https://joint-research-centre.ec.europa.eu/scientific-activities/key-competences-lifelong-learning/digital-competence-framework-digcomp/digcomp-30-resources_en) include a spreadsheet and structured JSON data alongside PDF/editable material. The 2025 fifth edition is released under CC BY 4.0 with attribution, change, and non-endorsement conditions. It has five competence areas, 21 competences, proficiency levels, competence statements, learning outcomes, and glossary entries. Learning outcomes distinguish knowledge, skills, and attitudes.
 
@@ -156,7 +156,7 @@ Documentation can expose authored domain structure, containment, sequence, and e
 
 [MIT OpenCourseWare](https://ocw.mit.edu/) exposes course pages and downloadable course materials, often including prerequisites, syllabi, topic/week sequences, assignments, and readings. No complete general-purpose catalog API was found. Course numbers and archived term versions provide usable identities, but per-course and per-asset licensing varies: much material is CC BY-NC-SA 4.0 while some materials are reserved or otherwise restricted. Review each selected course and resource; a site-wide default must not be applied indiscriminately.
 
-Course prerequisities and ordered topic sequences provide curriculum composition, while posted hours or workload estimates are sporadic and not actual personal effort. Instructor selection and course availability create selection bias. The ACM/IEEE-CS/AAAI CS2023 framework is more coherent and machine-readable in concept, but MIT OCW can supply richer implementation-level examples and course artifacts when item licensing permits.
+Course prerequisites and ordered topic sequences provide curriculum composition, while posted hours or workload estimates are sporadic and not actual personal effort. Instructor selection and course availability create selection bias. The ACM/IEEE-CS/AAAI CS2023 framework is more coherent and machine-readable in concept, but MIT OCW can supply richer implementation-level examples and course artifacts when item licensing permits.
 
 ### Package registries
 
@@ -196,6 +196,7 @@ Where two sources exchange mappings, model the mapping provenance explicitly. Fo
 ## Primary-source references
 
 - [Stack Exchange API documentation](https://api.stackexchange.com/docs), [throttling](https://api.stackexchange.com/docs/throttle), [Stack Overflow licensing](https://stackoverflow.com/help/licensing), and [quarterly dump access announcement](https://stackoverflow.blog/2024/10/03/community-product-update-knowledge-as-a-service/).
+- [Google Cloud BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) and [Stack Overflow on Snowflake Marketplace](https://stackoverflow.blog/2025/06/03/stack-exchange-knowledge-is-for-everyone-and-now-available-on-snowflake-marketplace/).
 - [Stack Overflow Developer Survey results](https://survey.stackoverflow.co/), [2026 methodology](https://survey.stackoverflow.co/2026/methodology), and [survey license statement](https://questions.survey.stackoverflow.co/).
 - [Wikidata data access](https://www.wikidata.org/wiki/Help:Data_access) and [Wikidata Query Service manual](https://www.mediawiki.org/wiki/Wikidata_Query_Service/User_Manual).
 - [ESCO downloads](https://esco.ec.europa.eu/en/use-esco/download), [ESCO FAQ/license](https://esco.ec.europa.eu/en/about-esco/faq), and [ESCO version history](https://esco.ec.europa.eu/en/about-esco/what-is-esco).
