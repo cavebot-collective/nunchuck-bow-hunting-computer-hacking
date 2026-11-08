@@ -199,79 +199,99 @@ sources:
 
   - id: acm-ccs
     name: ACM Computing Classification System 2012
-    status: blocked
+    status: candidate
     kind: technical-taxonomy
     homepage: https://www.acm.org/publications/class-2012
     redistribution: review
-    acquisition: "Browsable classification interface and public documentation found; a current official bulk file/API and redistribution grant were not established."
-    coverage: "Computing research concepts used for indexing ACM publications."
-    granularity: "Hierarchical computing subject concepts; classification is publication-oriented, not a skills/proficiency framework."
-    identifiers: "CCS concept identifiers used in publications and indexing."
-    relationships: "Broader/narrower hierarchy and classification assignments."
-    evidence_types: "Technical-domain taxonomy and concept identity."
-    independence: "Independent scholarly publisher taxonomy; no competency or market evidence."
-    cadence: "The widely used system is CCS 2012; current refresh cadence is unclear."
-    constraints: "Acquire a permitted machine-readable copy and clarify reuse terms before promotion to candidate."
-    rights: "Review required."
+    technical_feasibility: "Medium-high for obtaining the taxonomy; bulk endpoint availability and reuse rights remain unresolved. The official concept selector emits XML for selected concepts; an ACM Digital Library RDF/XML asset URL is known, but this research pass could not verify anonymous download."
+    acquisition: "Official browse/selection interface at https://dl.acm.org/ccs/ccs.cfm; author instructions document selected-concept XML output. A first-party ACM DL asset path has been observed at https://dl.acm.org/pb-assets/dl_ccs/acm_ccs2012-1626988337597.xml, but returned 403 to this web fetch. If the bulk file is unavailable, the visible hierarchy can be collected through the official selector with per-node coverage recorded; a full public API is not documented."
+    coverage: "Computing research and publication concepts; a domain taxonomy, not a professional skill or proficiency framework."
+    granularity: "Polyhierarchical subject concepts, reportedly arranged as a six-level tree in author guidance; paper assignments include selected concepts."
+    identifiers: "CCS concept IDs and labels embedded in CCSXML/RDF; preserve concept IDs and version."
+    relationships: "Broader/narrower or parent-child concept structure, including polyhierarchy, and publication-to-concept assignments."
+    evidence_types: "Technical-domain taxonomy and identity; publication classification assignments."
+    independence: "ACM's scholarly classification is distinct from job-market and package-registry evidence, but reflects academic publication organization."
+    cadence: "CCS 2012 remains the active widely used edition; no dependable refresh cadence established."
+    access_cost: "Low to moderate technical cost if the official RDF/XML asset is retrievable; moderate if selector traversal is required. Reuse permission may require a separate request."
+    terms_risk: "Copyright and redistribution scope are unresolved. Public browsing or a file URL does not itself establish a right to republish a transformed taxonomy."
+    constraints: "Verify the XML asset through normal ACM access and request permission if needed; do not treat an HTTP 403 from one research fetch as proof that the source is unavailable."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#independent-technical-taxonomies-and-curricula
-
   - id: ieee-technav
     name: IEEE Technology Navigator topics
-    status: blocked
+    status: candidate
     kind: technical-taxonomy
     homepage: https://technav.ieee.org/faq/
     redistribution: review
-    acquisition: "TechNav documents a public API, but requires an API key requested from IEEE. API-specific rate limits and bulk reuse rights were not publicly established."
-    coverage: "Thousands of engineering and technology topics drawn from the IEEE Thesaurus, with linked IEEE publications, standards, courses, videos, and organizations."
-    granularity: "Hierarchical topic terms and associated resource collections; the broader Thesaurus also includes controlled terms and relationship indicators."
-    identifiers: "IEEE topic and resource identifiers; confirm stable IDs in API documentation before integration."
-    relationships: "Taxonomy hierarchy plus topic-to-publication/standard/course/organization associations."
-    evidence_types: "Technical taxonomy, identity, related technical artifacts and composition proxies."
-    independence: "Independent IEEE technical vocabulary; topic-resource counts are generated from IEEE's own publishing catalog."
-    cadence: "TechNav says taxonomy follows an annual Thesaurus release; resource counts refresh periodically."
-    constraints: "API key, unpublished quotas, and no confirmed bulk redistribution rights make a public collector unsuitable without written permission."
-    rights: "Review required; do not assume IEEE Xplore API terms automatically govern TechNav."
+    technical_feasibility: "Medium: first-party API is documented and key-gated. Public topic browsing also exists. A complete listing/enumeration method is not specified in the FAQ."
+    acquisition: "TechNav documents API search, topic-detail, organization, and resource endpoints at https://technav.ieee.org/api/docs/. Request an API key from the TechNav team. Public browsing and alphabetical topic lookup are available without an API key; no downloadable bulk dump was found in the reviewed documentation."
+    coverage: "8,800+ engineering and technology topics drawn from the IEEE Thesaurus, with links to IEEE publications, conferences, standards, courses, videos, and organizations."
+    granularity: "Topic concepts with hierarchy and linked resource records; source API schema should be checked for stable topic IDs, aliases, and relationship predicates before acquisition."
+    identifiers: "IEEE TechNav topic and resource identifiers; stability and version semantics need confirmation from the API response schema."
+    relationships: "Taxonomy hierarchy plus topic-to-publication/standard/course/video/organization associations."
+    evidence_types: "Technical taxonomy, concept identity, and technical-artifact neighborhoods; resource frequencies are not skill competency."
+    independence: "IEEE's technical vocabulary is independent of job-board taxonomies; linked publication/resource evidence is generated from IEEE's own catalog."
+    cadence: "FAQ says taxonomy follows the annual IEEE Thesaurus release cycle and resource counts refresh periodically."
+    access_cost: "Low for manual browsing; API-key approval and undocumented quota make bulk cost uncertain. Request key, endpoint schema, pagination/list semantics, rate limits, and export scope."
+    terms_risk: "The TechNav FAQ does not state bulk redistribution terms. IEEE Xplore API terms are a separate service and should not be imputed to TechNav; confirm TechNav-specific rights."
+    constraints: "An API key establishes access, not permission to retain or redistribute a corpus. No public quota or archive guarantee found."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#independent-technical-taxonomies-and-curricula
-
   - id: linkedin-skills
-    name: LinkedIn Skills
-    status: blocked
+    name: LinkedIn Standardized Skills API and Skills
+    status: candidate
     kind: taxonomy
-    homepage: https://www.linkedin.com/
+    homepage: https://learn.microsoft.com/en-us/linkedin/shared/references/v2/standardized-data/skills
     redistribution: unknown
-    acquisition: "No documented public bulk skills taxonomy or general-purpose skills endpoint found. LinkedIn APIs require approved applications, OAuth permissions, and use-specific access."
-    evidence_types: "Potential professional vocabulary, profile endorsement/co-occurrence, and market demand."
-    independence: "Proprietary member/profile ecosystem; not independent of LinkedIn profile and job data."
-    constraints: "Do not scrape public pages. Obtain a specific data license and confirm retention, redistribution, and permitted use before reconsidering."
-    rationale: "Potentially valuable vocabulary, but current public acquisition and redistribution route is not established."
+    technical_feasibility: "High for a localized skill ID/name catalog if the application receives endpoint access; low for building a persistent profile or endorsement corpus without separate access and terms."
+    acquisition: "The first-party Standardized Data API documents GET, BATCH_GET, and GET_ALL. GET_ALL returns at most 50 records per page with start/count pagination and can enumerate skills for a requested locale. Use the documented API with OAuth and approved application permissions; the current public access guide does not list Standardized Skills among self-serve open permissions, so the exact approval/product route is unresolved. The API page was last updated 2023-05-08."
+    coverage: "LinkedIn standardized skill labels by locale; member profiles and job listings are separate datasets and are not implied by the skills endpoint."
+    granularity: "Localized standardized name and individual skill record; no skill proficiency, task decomposition, or hierarchy is documented by this endpoint."
+    identifiers: "Numeric skill ID and standardized skill URN, plus language and country locale."
+    relationships: "No hierarchy or dependency relationship is documented in the skills endpoint. Profile endorsement/co-occurrence and job-demand relations require separate API products/data and permissions."
+    evidence_types: "Taxonomy and concept identity; profile co-occurrence or market demand only if separately authorized."
+    independence: "Proprietary platform vocabulary; profile and job signals would arise from LinkedIn's own member/job ecosystem."
+    cadence: "No taxonomy release cadence or snapshot/version contract is documented; the API reference is dated 2023."
+    access_cost: "Low-volume enumeration is technically modest at 50 records/page, but entitlement, quota, application review, and any commercial/research fee are unknown."
+    terms_risk: "OAuth/API access is not permission to create a reusable dataset. The published API terms tightly limit storage and transformed copies; the User Agreement allows exceptions only where LinkedIn separately permits them in writing. Request an explicit research/data license covering retention and redistribution."
+    constraints: "If no API approval is granted, publicly visible profile labels can only yield an incomplete platform-facing sample, not the standardized ID catalog. Do not bypass authentication or access controls."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
-
   - id: indeed-taxonomy
-    name: Indeed taxonomy
-    status: blocked
+    name: Indeed Skills Map, SUID taxonomy, and partner data
+    status: candidate
     kind: taxonomy
-    homepage: https://www.indeed.com/
+    homepage: https://www.indeed.com/skillsmap
     redistribution: unknown
-    acquisition: "Partner APIs are approved integration interfaces, not a public taxonomy export. The developer agreement restricts database creation, permanent copies, redistribution, and competitive use."
-    evidence_types: "Potential job-market vocabulary and demand; job-posting data would be a separate source."
-    independence: "Proprietary job marketplace; overlaps heavily with other posting-derived market signals."
-    constraints: "No scraping or corpus-building from the public site; a written license would be required for this research use."
-    rationale: "Keep as a blocked lead unless Indeed grants a compliant data-access and reuse path."
+    technical_feasibility: "High for visible aggregate Skills Map data and documented SUID reference tables; low-to-medium for a full skills vocabulary or raw posting corpus without a licensed or authorized bulk route."
+    acquisition: "The public Skills Map exposes interactive U.S. posting aggregates and reports 3,000+ skills across 48 categories and 108 subcategories; counts can vary by snapshot (a 2025 Hiring Lab report said 47 categories). Indeed Partner Docs expose HTML tables for occupation SUIDs (six tiers) and search-attribute SUIDs including skills. No standalone public bulk skill-taxonomy export or general read API for all postings was found. Public-page collection can capture only what the visualization renders; obtaining underlying raw postings or complete internal taxonomy requires an authorized partner/data agreement."
+    coverage: "Inferred skill demand from U.S. job postings; partner taxonomy references also cover occupations, job types, attributes, benefits, and employer sectors."
+    granularity: "Skills Map skill/category/subcategory and aggregate industry/region demand; partner occupation hierarchy has six tiers and five-character SUID identifiers."
+    identifiers: "Indeed SUIDs for occupations, job types, and attributes, including skill search attributes; preserve SUID change logs and country/version context."
+    relationships: "Occupation parent/child hierarchy; aggregate skill demand by industry and region; no formal skill prerequisite graph documented."
+    evidence_types: "Market taxonomy, machine-inferred skill demand, occupation identity/hierarchy, and selected job attributes."
+    independence: "Indeed's own job marketplace and classification model; market signals overlap other job boards and posting aggregators. Skills Map labels are model outputs, not independent assessments of workers."
+    cadence: "Indeed says Skills Map evolves continuously; public counts differ across snapshots. Partner SUID reference pages carry change logs."
+    access_cost: "Low for bounded UI/SUID table capture; high for complete posting corpus or persistent reuse if a data license is needed. Partner API eligibility and scope are integration-specific."
+    terms_risk: "Indeed's developer agreement restricts permanent copies/databases, redistribution without written consent, and using partner APIs outside an approved integration. These restrictions affect authorized reuse, not whether public aggregate pages are technically observable. Ask for a research license/data export if durable storage or republication is required."
+    constraints: "A UI-derived snapshot is not a complete taxonomy or raw posting corpus; preserve rendered query/filters/date and distinguish model-inferred skills from employer-written terms."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
-
   - id: dice-taxonomy
-    name: Dice technology skill and job taxonomy
-    status: blocked
-    kind: taxonomy
-    homepage: https://www.dice.com/
+    name: Dice technology job postings and skill signals
+    status: candidate
+    kind: market-data
+    homepage: https://www.dice.com/about/mcp
     redistribution: unknown
-    acquisition: "No public bulk taxonomy endpoint found. Dice terms prohibit automated retrieval, data mining, and copying site structure/content."
-    evidence_types: "Potential technology vocabulary, job-market demand, and proprietary matching relationships."
-    independence: "Proprietary technology job marketplace; market signals overlap with other posting/profile corpora."
-    constraints: "Do not scrape. Reconsider only with a documented export/API and written reuse terms."
-    rationale: "A potentially useful technical-market source with no presently verified compliant bulk acquisition route."
+    technical_feasibility: "High for bounded, structured posting searches through Dice's first-party public MCP endpoint; not a full taxonomy dump and not proven complete across all postings."
+    acquisition: "The Dice MCP server at https://mcp.dice.com/mcp documents unauthenticated search_jobs access, filters, page_count metadata, and pagination with 1-100 jobs per page. Responses include unique job IDs and descriptions; Dice's setup article also describes required skills/technologies. The MCP docs discuss HTTP 429 and backoff but do not publish a numeric quota."
+    coverage: "Technology-focused job search results, with job titles, descriptions, employer, location, salary when available, dates, and technology/skill text."
+    granularity: "Individual listing plus employer/job attributes; skill evidence must be extracted from description or returned text. Dice's proprietary matching taxonomy is not exported by this endpoint."
+    identifiers: "Unique Dice job ID, posting URL, employer, and timestamps; preserve query, filters, page, and retrieval time because search results change."
+    relationships: "Term co-occurrence within job descriptions and observed title/location/employer relationships; no formal skill hierarchy or dependency graph is exposed."
+    evidence_types: "Market demand and posting-level co-occurrence; not competency assessment or person-level skill evidence."
+    independence: "Dice-specific technology job marketplace; posting-derived signals overlap Indeed, LinkedIn, Lightcast, and other labor datasets."
+    cadence: "Real-time search; no snapshot/version cadence or historical archive is documented."
+    access_cost: "Low for a bounded sample using the documented endpoint; broad coverage requires query strata, pagination, deduplication, frequent refresh, and handling result caps and 429s."
+    terms_risk: "Dice publishes a first-party MCP endpoint without authentication, but its site terms restrict unapproved automated retrieval, indexing/data mining, and persistent reuse, including AI/model use. The docs do not clearly grant a right to build or redistribute a durable corpus. Request clarification/permission for that use; endpoint availability alone is not a dataset license."
+    constraints: "Use as job-posting evidence, not as Dice's skill ontology. Complete market coverage and bulk storage rights are unverified."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
-
   - id: lightcast-skills
     name: Lightcast Skills taxonomy and Classification API
     status: candidate
@@ -285,11 +305,46 @@ sources:
     relationships: "Skill-to-category hierarchy, related skill relationships, and aggregated co-occurrence/demand signals where licensed."
     evidence_types: "Market taxonomy, identity, demand and co-occurrence."
     independence: "Commercially curated, but substantially derived from job postings, resumes, and profiles; overlaps with other market sources and may map to O*NET."
-    cadence: "Provider says taxonomy updates monthly; confirm service-specific snapshot/version semantics."
+    cadence: "Provider says taxonomy refreshes every four weeks; confirm service-specific snapshot/version semantics."
     constraints: "Access approval, license, price, rate limits, and redistribution rights require provider confirmation."
     rights: "Review required; API access is not redistribution permission."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#linkedin-indeed-dice-and-lightcast
-
+  - id: computer-science-ontology
+    name: Computer Science Ontology (CSO)
+    status: candidate
+    kind: technical-taxonomy
+    homepage: https://cso.kmi.open.ac.uk/downloads
+    redistribution: allowed
+    technical_feasibility: "High: versioned N-Triples, OWL, Turtle, and CSV downloads are published without an API key."
+    acquisition: "Download the selected version from the CSO portal; v3.5 was released 2025-07-29. Portal browse and per-topic RDF representations are also documented."
+    coverage: "Research topics, mostly in computer science, automatically generated by Klink-2 over the Rexplore corpus of approximately 16 million publications, with some expert-revised links."
+    granularity: "About 15,000 topics and 166,000 semantic relationships in v3.5."
+    identifiers: "Source-native topic URIs and labels."
+    relationships: "Eight relation types include superTopicOf, relatedEquivalent, preferentialEquivalent, contributesTo, owl:sameAs, schema:relatedLink, rdf:type, and rdfs:label."
+    evidence_types: "Technical research taxonomy, identity, equivalence, hierarchy, contribution, and linked artifacts; no direct competency, market-demand, or effort measurement."
+    independence: "Independent of job-market evidence and ACM CCS curation, but derived from scholarly publications and therefore shares academic-topic bias. Some links use external knowledge graphs and publication sources."
+    cadence: "Versioned releases; v3.5 is the newest version found at research time. No fixed refresh schedule."
+    rights: "CC BY 4.0; preserve attribution and version."
+    constraints: "Do not collapse relation types into one generic related edge; automatically inferred relations need confidence/provenance treatment."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#additional-open-technical-taxonomies
+  - id: openalex-topics
+    name: OpenAlex topic taxonomy and work topic assignments
+    status: candidate
+    kind: scholarly-taxonomy
+    homepage: https://help.openalex.org/data/topics/
+    redistribution: allowed
+    technical_feasibility: "High: REST API supports list/search/filter/page and individual topic retrieval; no key is required for basic use."
+    acquisition: "Use the OpenAlex Topics endpoint, optionally retrieve assigned topics from Works, or acquire a full OpenAlex data snapshot. Public API is free to start; a free key increases daily budget. Record the API snapshot date and schema."
+    coverage: "Research works across disciplines; taxonomy contains 4 domains, 26 fields, 252 subfields, and 4,516 topics at the 2026-10-26 documentation snapshot."
+    granularity: "Topic records with ID, name, description, hierarchy membership, and publication counts; works receive up to three inferred topics when metadata permits."
+    identifiers: "Stable-looking OpenAlex T-prefixed topic IDs and source URIs; record redirects and version history because taxonomy changes."
+    relationships: "Domain-to-field-to-subfield-to-topic hierarchy; topic assignments are probabilistic model outputs, not hand-authored skill links."
+    evidence_types: "Scholarly subject taxonomy, concept identity, publication-level co-occurrence and prevalence; not competency or professional market demand."
+    independence: "Distinct from job-market and package data. Topic clusters use OpenAlex citation relationships; labels/hierarchy are partly generated/mapped using Scopus ASJC, so it is not fully independent of external classification."
+    cadence: "OpenAlex records update continuously; no fixed taxonomy release cadence found. Preserve retrieval date and topic IDs."
+    rights: "OpenAlex states data are CC0."
+    constraints: "Topics are inferred aboutness labels, not a vocabulary of skills. The 4,516 count and hierarchy are dynamic."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#additional-open-technical-taxonomies
   - id: official-doc-structures
     name: Official documentation structures
     status: candidate
