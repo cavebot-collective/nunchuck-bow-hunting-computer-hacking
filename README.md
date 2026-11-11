@@ -8,6 +8,8 @@ A reproducible source-data factory for investigating technical skills and compet
 
 Acquire upstream skill/technology vocabularies and contextual datasets reproducibly, preserve their native structure and provenance, and package immutable snapshots in GitHub Actions.
 
-The first end-to-end adapter collects Stack Overflow tags. Candidate integrations—including Wikidata, job-board taxonomies, package ecosystems, documentation structures, and expert-authored curricula—live in `sources.yaml` even before implementation so useful leads do not disappear merely because they are not next in the queue.
+The current adapters collect a Stack Overflow tag sample and a narrow Wikidata context sample. Candidate integrations—including job-board taxonomies, package ecosystems, documentation structures, and expert-authored curricula—live in `sources.yaml` before implementation so useful leads do not disappear merely because they are not next in the queue.
 
 See `docs/SOURCES.md` for lifecycle semantics.
+
+See `docs/SOURCE_LANDSCAPE_RESEARCH.md` for the evidence-backed comparison of acquisition routes, coverage, identifiers, relationships, reuse conditions, and candidate priorities.

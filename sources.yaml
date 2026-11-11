@@ -28,8 +28,8 @@ sources:
     kind: api
     homepage: https://www.wikidata.org/
     collector: scripts/collect_wikidata.py
-    redistribution: review
-    rationale: "Identity/context layer for technology names, aliases, classes, ecosystems, platforms, and typed relations. Useful for disambiguation; not a professional competency taxonomy and not independent validation for imported claims."
+    redistribution: allowed
+    rationale: "CC0 identity/context layer for technology names, aliases, classes, ecosystems, platforms, and typed relations. Useful for disambiguation; not a professional competency taxonomy and not independent validation for imported claims. The collector uses structured data, not linked media."
     acquisition: "Public API, SPARQL query service, and versioned database dumps; dumps are best for reproducible snapshots, while query services may throttle."
     identifiers: "Wikidata QIDs and property IDs; aliases, statements, qualifiers, references, and external identifiers."
     relationships: "Typed claims including subclass, instance, part, platform, product, programming language, and external-ID links."
@@ -56,6 +56,7 @@ sources:
   - id: esco
     name: ESCO skills, competences, qualifications and occupations
     status: candidate
+    priority: 1
     kind: taxonomy
     homepage: https://esco.ec.europa.eu/en/use-esco/download
     redistribution: allowed
@@ -66,7 +67,7 @@ sources:
     relationships: "Broader/narrower concept hierarchy, occupation-to-skill/knowledge links, and mappings to ISCO-08."
     evidence_types: "Taxonomy, identity, competency/knowledge composition, occupation mapping."
     independence: "Institutionally curated by the European Commission with stakeholder input; not independent from other EU frameworks where mappings are explicitly supplied."
-    cadence: "Current release at research time is v1.2.1, updated 2025-12-10; no fixed future cadence found."
+    cadence: "Current release at research time is v1.2.1; the download page displays last update 10/12/2025 without labeling the date format. No fixed future cadence found."
     constraints: "No charge or API key for dataset downloads found. Pin release and language files. Attribution and disclosure of modifications required."
     rights: "Reuse is allowed for any purpose with attribution and clear marking of modifications."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#esco
@@ -74,6 +75,7 @@ sources:
   - id: onet
     name: O*NET occupational information database
     status: candidate
+    priority: 2
     kind: database
     homepage: https://www.onetcenter.org/database.html
     redistribution: review
@@ -92,6 +94,7 @@ sources:
   - id: nice-framework
     name: NIST NICE Framework Components
     status: candidate
+    priority: 3
     kind: competency-framework
     homepage: https://www.nist.gov/itl/applied-cybersecurity/nice/nice-framework-resource-center/nice-framework-current-versions
     redistribution: review
@@ -110,6 +113,7 @@ sources:
   - id: digcomp
     name: European Digital Competence Framework (DigComp 3.0)
     status: candidate
+    priority: 4
     kind: competency-framework
     homepage: https://joint-research-centre.ec.europa.eu/scientific-activities/key-competences-lifelong-learning/digital-competence-framework-digcomp/digcomp-30-resources_en
     redistribution: allowed
@@ -312,6 +316,7 @@ sources:
   - id: computer-science-ontology
     name: Computer Science Ontology (CSO)
     status: candidate
+    priority: 5
     kind: technical-taxonomy
     homepage: https://cso.kmi.open.ac.uk/downloads
     redistribution: allowed

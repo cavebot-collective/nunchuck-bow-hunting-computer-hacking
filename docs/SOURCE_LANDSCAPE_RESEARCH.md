@@ -37,21 +37,21 @@ The technical paths remain assessable even where a source's terms restrict the i
 
 ## Ranked next five integrations
 
-Scoring is a provisional ordinal planning aid, not measured probability. Each factor is 1–5. Information gain is weighted twice because the project needs new axes, not merely cheap volume. Implementation cost is scored with 1 = low and 5 = high; the formula rewards lower cost:
+Scoring is a provisional ordinal planning aid, not measured probability. Each factor is 1–5. Information gain is weighted twice because the project needs new axes, not merely cheap volume. Linkage scores stable source identifiers, typed relations, and practical crosswalks to existing sources. Rights clarity scores whether the intended acquisition, retention, and redistribution scope is documented; API availability alone does not earn a high score. Implementation cost is scored with 1 = low and 5 = high; the formula rewards lower cost:
 
-**Priority = (2 × information gain + source independence + reproducibility + (6 − implementation cost)) / 5**
+**Priority = (2 × information gain + source independence + reproducibility + linkage + rights clarity + (6 − implementation cost)) / 7**
 
 Source independence is about the evidence origin, not whether the formats differ. A mapping copied from another framework receives no extra independence credit.
 
-| Rank | Integration | Information gain | Independence | Reproducibility | Cost | Score | Why now |
-|---:|---|---:|---:|---:|---:|---:|---|
-| 1 | ESCO | 5 | 5 | 5 | 2 | 4.8 | Broad multilingual occupation-to-skill/knowledge graph; free versioned machine-readable downloads and stable concept URIs. |
-| 2 | O*NET | 5 | 5 | 5 | 2 | 4.8 | Broad U.S. occupation, task, skill, work-context, and rating structure with quarterly downloadable releases under a mostly CC BY 4.0 database license. |
-| 3 | NICE Framework Components | 4 | 5 | 5 | 1 | 4.6 | Cheap reproducible JSON/XLSX and unusually explicit cybersecurity role, competency-area, task, knowledge, and skill structure. Treat partial role-to-TKS mappings as missing data. |
-| 4 | DigComp 3.0 | 4 | 4 | 5 | 1 | 4.4 | Open, structured competence statements, learning outcomes, proficiency levels, and K/S/attitude distinctions. Broad digital competence rather than an occupational technology catalog. |
-| 5 | Computer Science Ontology (CSO) | 4 | 4 | 5 | 2 | 4.2 | Open, versioned OWL/Turtle/CSV with about 15K topics and 166K typed relations. It contributes academic technical structure independently of labor data; preserve that it is a research-topic ontology, not a competency framework. |
+| Rank | Integration | Information gain | Independence | Reproducibility | Linkage | Rights clarity | Cost | Score | Why now |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---|
+| 1 | ESCO | 5 | 5 | 5 | 5 | 5 | 2 | 4.9 | Broad multilingual occupation-to-skill/knowledge graph; free versioned machine-readable downloads and stable concept URIs. |
+| 2 | O*NET | 5 | 5 | 5 | 5 | 4 | 2 | 4.7 | Broad U.S. occupation, task, skill, work-context, and rating structure with quarterly downloadable releases; stable codes and crosswalks. Check table-level license exceptions. |
+| 3 | NICE Framework Components | 4 | 5 | 5 | 5 | 4 | 1 | 4.6 | Cheap reproducible JSON/XLSX, typed role/task/knowledge/skill relations, and an O*NET-SOC crosswalk. Treat incomplete role-to-TKS mappings as missing data. |
+| 4 | DigComp 3.0 | 4 | 4 | 5 | 4 | 5 | 1 | 4.4 | Open, structured competence statements, learning outcomes, proficiency levels, and K/S/attitude distinctions. Broad digital competence rather than an occupational technology catalog. |
+| 5 | Computer Science Ontology (CSO) | 4 | 4 | 5 | 4 | 5 | 2 | 4.3 | Open, versioned OWL/Turtle/CSV with about 15K topics and 166K typed relations. It contributes academic technical structure independently of labor data; preserve that it is a research-topic ontology, not a competency framework. |
 
-CS2023 is the strongest near-miss at 4.0: its expert curriculum, knowledge units, learning outcomes, and instructional core hours add a curricular axis, but extraction and redistribution rights raise implementation cost. The Stack Overflow Developer Survey and SFIA follow: the survey is available under ODbL but shares publisher and audience with Stack Overflow Q&A; SFIA has direct professional relevance and RDF/Excel files, but all use requires a license and the price/terms need confirmation. OpenAlex Topics is another low-cost scholarly classification lead, but its labels are inferred and its hierarchy partly maps to Scopus ASJC, making it less independent than CSO. The first technical-composition integration should then be one bounded package ecosystem, likely npm replication or a smaller PyPI classifier slice. Package dependencies are not a substitute for a skills taxonomy.
+CS2023 is the strongest near-miss: its expert curriculum, knowledge units, learning outcomes, and instructional core hours add a curricular axis, but its extraction cost and redistribution gate lower its combined priority. The Stack Overflow Developer Survey and SFIA follow: the survey is available under ODbL but shares publisher and audience with Stack Overflow Q&A; SFIA has direct professional relevance and RDF/Excel files, but all use requires a license and the price/terms need confirmation. OpenAlex Topics is another low-cost scholarly classification lead, but its labels are inferred and its hierarchy partly maps to Scopus ASJC, making it less independent than CSO. The first technical-composition integration should then be one bounded package ecosystem, likely npm replication or a smaller PyPI classifier slice. Package dependencies are not a substitute for a skills taxonomy.
 
 ### Score notes and tradeoffs
 
@@ -94,11 +94,11 @@ Its strongest contribution is concept disambiguation: technology names, aliases,
 
 #### ESCO
 
-The European Commission's [download page](https://esco.ec.europa.eu/en/use-esco/download) provides free versioned datasets in RDF, Turtle, ODS, CSV, XML, and JSON-LD, in 28 languages. ESCO's [FAQ and reuse conditions](https://esco.ec.europa.eu/en/about-esco/faq) allow use and adaptation for any purpose with attribution and clear disclosure of modifications. Current at research time: v1.2.1, last updated 2025-12-10. Downloads are free and require no API key; the public documentation reviewed does not state an API request quota, so versioned files are the reproducible bulk path.
+The European Commission's [download page](https://esco.ec.europa.eu/en/use-esco/download) provides free versioned datasets in RDF, Turtle, ODS, CSV, XML, and JSON-LD, in 28 languages. ESCO's [FAQ and reuse conditions](https://esco.ec.europa.eu/en/about-esco/faq) allow use and adaptation for any purpose with attribution and clear disclosure of modifications. Current at research time: v1.2.1; the download page displays last update `10/12/2025`, retained verbatim because its date format is not labeled. Downloads are free and require no API key; the public documentation reviewed does not state an API request quota, so versioned files are the reproducible bulk path.
 
 ESCO distinguishes occupation concepts from skill/competence and knowledge concepts. It includes preferred/nonpreferred terms, multilingual labels, descriptions, occupation profiles, and mappings to ISCO-08. Concept URIs provide stable identity; download structure links language-specific labels to language-independent relations. This offers a real concept graph: broader/narrower relations and occupation-to-skill/knowledge relations. Pin the exact download release and language set. The web and local APIs use the ESCO OWL data model, but the download page warns that the existing local API is for reference and will be replaced; bulk files are the more reproducible starting point. Current future release cadence is not guaranteed.
 
-Independence is relatively high as an institutional, stakeholder-developed European classification. Some ESCO concepts or mappings connect to other frameworks, including the e-CF and DigComp; mapped rows should not be double-counted as independent corroboration. ESCO classifies occupational relevance, not an individual's competence or effort.
+Independence is relatively high as an institutional, stakeholder-developed European classification. Some ESCO concepts or mappings connect to other frameworks, including the e-CF and DigComp; mapped rows should not be double-counted as independent corroboration. ESCO classifies occupational relevance, not an individual's competence or effort. No fixed future release cadence is documented.
 
 #### O*NET
 
@@ -149,6 +149,7 @@ The [Dice site terms](https://www.dice.com/about/terms-and-conditions) prohibit 
 **Lightcast.** Lightcast remains the strongest commercial market-taxonomy lead. Its [skills taxonomy page](https://lightcast.io/taxonomies/skills-taxonomy) describes more than 34,000 concepts organized into category, subcategory, and skill tiers with unique IDs and definitions. [API access documentation](https://docs.lightcast.io/lightcast-api/docs/api-access) says public-good access is free but approval-based; commercial or production use requires a commercial license. The free API scope limits extraction to 50 requests per month and excludes other taxonomies and cross-dataset relationships. The [Skills v10 methodology](https://kb.lightcast.io/en/articles/7216059-lightcast-skills-taxonomy-methodology-and-skills-v10) says the taxonomy derives from hundreds of millions of postings, resumes, and profiles, and refreshes every four weeks; v10 was released 2026-10-23. It has a category hierarchy and dynamic supply/demand relationships.
 
 Lightcast combines taxonomist curation with aggregated market evidence, so it is useful as a labor-market model but not independent confirmation of the underlying posting/profile vocabulary. It may map to O*NET, which also does not create a second independent assertion. Before prioritizing an integration, get written answers on complete extraction, stable IDs, historical snapshots, quotas, prices, and retention/redistribution.
+
 ### Independent technical taxonomies and curricula
 
 #### CS2023
@@ -178,6 +179,7 @@ OpenAlex says the topics were built by clustering a citation network, naming clu
 IEEE's [TechNav FAQ](https://technav.ieee.org/faq/) describes 8,800+ engineering/technology topics derived from the IEEE Thesaurus, API endpoints for topic search/detail and linked resources, and annual taxonomy updates. It requires an API key requested from IEEE. Public alphabetical browsing is also available. The API route is technically plausible, but the FAQ does not settle enumeration/pagination, API quotas, ID stability, versioned archive access, or reuse rights. These are questions to send to the TechNav team after obtaining the key; the absence of a public quota is not evidence that bulk acquisition is impossible.
 
 TechNav is a candidate with an approval/key gate. Its technical vocabulary is independent of job-market evidence; resource counts and links are based on IEEE's own content catalogue. IEEE Xplore's API has separate terms and is not evidence of TechNav's terms. Obtain TechNav-specific answers before retaining/re-publishing a complete corpus.
+
 #### Technical documentation structures
 
 Official documentation is a source family, not one uniform dataset. Prefer first-party Git repositories and structural files over HTML scraping:
