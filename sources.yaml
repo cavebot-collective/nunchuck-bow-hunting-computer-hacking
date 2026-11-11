@@ -22,6 +22,26 @@ sources:
     notes: "Existing collector is a CI/acquisition smoke sample only; it does not collect related tags, synonyms, or a complete taxonomy."
     research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stack-overflow
 
+  - id: stackoverflow-tags-api-complement
+    name: Stack Exchange tag synonyms, related tags, and wiki content
+    status: candidate
+    kind: api
+    homepage: https://api.stackexchange.com/docs
+    redistribution: review
+    technical_feasibility: "High for bounded, paginated snapshots from the Stack Exchange API; not a replacement for the question dump or hypergraph."
+    acquisition: "Use /tags/synonyms, /tags/{tags}/related, and /tags/{tags}/wikis for site=stackoverflow. Preserve API version, site, filters, pagination, request time, and any returned backoff instruction."
+    coverage: "Current synonym mappings, related-tag counts, and tag wiki/excerpt material; no complete question corpus or historical taxonomy is provided."
+    granularity: "Directed source/target tag synonym pairs, related-tag aggregate counts, and wiki/excerpt posts."
+    identifiers: "Exact tag names scoped to Stack Overflow; preserve post IDs for wiki/excerpt content. Tag names can be removed and are not immutable identifiers."
+    relationships: "Directed synonym mappings; related-tag counts derived from question pairings; tag-to-wiki/excerpt references. Keep these relation types distinct."
+    evidence_types: "Platform taxonomy state, user-contributed tag descriptions, and co-occurrence summaries from the same question corpus."
+    independence: "Not independent of Stack Overflow questions or the main dump; related tags are a derived view of question pairings."
+    cadence: "Live API; snapshot retrieval time and endpoint parameters because results can change."
+    access_cost: "Low for bounded requests; pagination, quota, backoff, and per-site scope make a full historical reconstruction unavailable."
+    terms_risk: "User contributions carry date-dependent CC BY-SA terms and API use has separate terms/attribution rules. API availability is not blanket redistribution permission."
+    constraints: "Honor documented quota and backoff. Do not treat related tags as semantic equivalence or curated hierarchy."
+    research: docs/SOURCE_LANDSCAPE_RESEARCH.md#stack-overflow
+
   - id: wikidata
     name: Wikidata
     status: implemented
